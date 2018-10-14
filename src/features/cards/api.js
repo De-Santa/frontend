@@ -24,3 +24,13 @@ export const cardsGet = () => (
     '/cards/',
   )
 )
+
+/**
+ * @return {Promise<{result: Array<{id: number, content: string, created: number, author_id: string, title: string}>}>}
+ */
+export const cardRead = (id) => (
+  (dispatch) => dispatch(
+    api.get,
+    `/cards/${id}`,
+  )
+)

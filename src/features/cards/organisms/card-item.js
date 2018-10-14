@@ -4,9 +4,8 @@ import PropTypes from 'prop-types'
 import { format } from 'date-fns'
 import Markdown from 'react-markdown'
 import highlight from 'highlightjs'
-
 import { Col, Row } from 'styled-components-layout'
-import { Card, H3, Text } from 'ui/atoms'
+import { Card, H3, Text, Link } from 'ui/atoms'
 
 
 const CardContent = styled(Text)`
@@ -38,27 +37,36 @@ export class CardItem extends Component {
   }
 
   render() {
-    const { title, createdAt, content } = this.props
+    const { id, title, createdAt, content, canEdit = false } = this.props
 
     return (
       <Card>
         <Col>
           <Row justify="space-between">
             <H3 narrow>{title}</H3>
-            <i>{format(new Date(createdAt), 'HH:MM MM/DD/YYYY')}</i>
+            <Row basis="18%" justify="space-between">
+              <Link to={`/open/${id}`}>Open</Link>
+              {canEdit && (
+                <Link to="/edit">Edit</Link>
+              )}
+              <i>{format(new Date(createdAt), 'HH:MM MM/DD/YYYY')}</i>
+            </Row>
           </Row>
         </Col>
         <CardContent innerRef={this.contentRef}>
           <Markdown source={content} />
         </CardContent>
       </Card>
+
     )
   }
 }
 
 CardItem.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   // author_id: PropTypes.number.isRequired,
   createdAt: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
+  canEdit: PropTypes.bool.isRequired,
 }
