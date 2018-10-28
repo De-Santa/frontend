@@ -44,7 +44,7 @@ export class CardItem extends Component {
         <Col>
           <Row justify="space-between">
             <H3 narrow>{title}</H3>
-            <Row basis="18%" justify="space-between">
+            <Row basis="25%" justify="space-between">
               <Link to={`/open/${id}`}>Open</Link>
               {canEdit && (
                 <Link to="/edit">Edit</Link>

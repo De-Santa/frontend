@@ -35,6 +35,5 @@ export function cardsGet() {
 export async function cardRead(ctx) {
   const data = mapCard(models.Cards.findOne({ $loki: +ctx.params.cardId }))
 
-  console.log('test', data)
   return Future.of(data)
 }
